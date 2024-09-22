@@ -5,7 +5,7 @@ stages
 {
 
 stage('scm checkout')
-{steps { git branch: 'main', url: 'https://github.com/diyakashyap/Devops-Jenkins.git'  }}
+{steps { git branch: 'main', url: 'https://github.com/diyakashyap/mavenproject.git'  }}
 
 
 stage('Compile the job')
