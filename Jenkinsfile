@@ -1,27 +1,31 @@
 pipeline
 {
-agent any
-stages
-{
-
-stage('scm checkout')
-{
-    steps 
-    { 
-        git branch: 'main', url: 'https://github.com/diyakashyap/mavenproject.git' 
-    }
-}
-
-
-stage('Build the code')
- {
-    steps 
-    { 
-        withMaven(globalMavenSettingsConfig: '', jdk: 'JDK_home', maven: 'Maven_home', mavenSettingsConfig: '', traceability: true) 
+    agent any
+    stages
+    {
+        // stage('test')
+        // {
+        //     steps{withMaven(globalMavenSettingsConfig: '', jdk: 'JDK_home', maven: 'Maven_home', mavenSettingsConfig: '', traceability: true)} {
+        //         sh 'mvn test'
+        //         }
+        // }
+        stage('package')
         {
-            sh 'mvn package'
-        } 
+            steps{withMaven(globalMavenSettingsConfig: '', jdk: 'JDK_home', maven: 'Maven_home', mavenSettingsConfig: '', traceability: true)} {
+                sh 'mvn clean package'
+            }
+        }
+        stage('Deploy')
+        {
+            steps
+            {
+                sshagent(['DEVCICD'])
+                {
+                sh 'scp -o StrictHostKeyChecking=no webapp/target/webapp.war ec2-user@18.185.118.206:/usr/share/tomcat/webapps'
+                }
+            }
+            
+        }
+        
     }
-}
-}
 }
