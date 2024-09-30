@@ -10,6 +10,16 @@ pipeline
                 sh 'mvn package'
             }
         }
+        stage('Deploy the code')
+        {
+            steps{sshagent(['DEVCICD'])
+             {
+                    sh 'scp webapp/target/webapp.war ec2-user@3.68.73.85:/usr/share/tomcat/webapps'
+            }
+
+
+                }
+        }
 
     }
 }
