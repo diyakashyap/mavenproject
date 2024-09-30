@@ -14,7 +14,7 @@ pipeline
         {
             steps{sshagent(['DEVCICD'])
              {
-                    sh 'scp webapp/target/webapp.war ec2-user@3.68.73.85:/usr/share/tomcat/webapps'
+                    sh 'scp -o StrictHostKeyChecking=no webapp/target/webapp.war ec2-user@3.68.73.85:/usr/share/tomcat/webapps'
             }
 
 
