@@ -3,9 +3,9 @@ pipeline
     agent any
     stages
     { 
-        stage('build')
+        stage('build the code')
         {
-            withMaven(globalMavenSettingsConfig: '', jdk: 'JDK_home', maven: 'Maven_home', mavenSettingsConfig: '', traceability: true) 
+            steps{withMaven(globalMavenSettingsConfig: '', jdk: 'JDK_home', maven: 'Maven_home', mavenSettingsConfig: '', traceability: true)}
             {
                 sh 'mvn package'
             }
