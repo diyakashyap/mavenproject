@@ -2,7 +2,7 @@ pipeline
 {
     agent any
     stages
-    { //agent{label 'Java'}
+    { agent{label 'Java'}
         stage('build the code')
         { 
             steps {withMaven(globalMavenSettingsConfig: '', jdk: 'JDK_home', maven: 'Maven_home', mavenSettingsConfig: '', traceability: true)
