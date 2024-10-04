@@ -1,9 +1,8 @@
 pipeline
 {
-    //agent any
-    agent {label 'Java'}
+    agent any
     stages
-    { 
+    { agent {label 'JAVA'}
         stage('build the code')
         { 
             steps {withMaven(globalMavenSettingsConfig: '', jdk: 'JDK_home', maven: 'Maven_home', mavenSettingsConfig: '', traceability: true)}
@@ -12,7 +11,7 @@ pipeline
             }
         }
         stage('Deploy the code')
-        { 
+        { agent {label 'JAVA'}
             steps{shagent(['DEVCICD'])
              {
                     sh 'scp -o StrictHostKeyChecking=no webapp/target/webapp.war ec2-user@3.68.73.85:/usr/share/tomcat/webapps'
