@@ -5,11 +5,11 @@ pipeline
     { //agent{label 'Java'}
         stage('build the code')
         { 
-            steps {withMaven(globalMavenSettingsConfig: '', jdk: 'JDK_home', maven: 'Maven_home', mavenSettingsConfig: '', traceability: true)}
+            steps {withMaven(globalMavenSettingsConfig: '', jdk: 'JDK_home', maven: 'Maven_home', mavenSettingsConfig: '', traceability: true)
             {
                 sh 'mvn package'
             }
-        }
+        }}
         stage('Deploy the code')
         {// agent{label 'Java'}
             steps{shagent(['DEVCICD'])
