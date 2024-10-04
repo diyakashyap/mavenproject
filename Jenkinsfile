@@ -1,6 +1,6 @@
 pipeline
 {
-    agent any
+    //agent any
     agent {label 'Java'}
     stages
     { 
