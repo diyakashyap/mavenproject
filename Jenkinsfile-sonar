@@ -1,6 +1,6 @@
 pipeline
 {
-    agent{label 'Java'} // working
+    agent any // working
     stages
     { //agent{label 'Java'} not working
         stage('build the code')
