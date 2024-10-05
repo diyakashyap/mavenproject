@@ -7,7 +7,7 @@ pipeline
         { 
             steps {withMaven(globalMavenSettingsConfig: '', jdk: 'JDK_home', maven: 'Maven_home', mavenSettingsConfig: '', traceability: true)
             {
-                withSonarQubeEnv(credentialsId: 'sonar') 
+                withSonarQubeEnv(credentialsId: 'sonar', installationName: 'sonar' ) 
                 {
                     sh 'mvn clean -B -DskipTests sonar:sonar package'
             }}
