@@ -1,7 +1,7 @@
 pipeline
 {
   agent none
-
+  
     stages
     { agent{label 'Java'} 
         stage('build the code')
