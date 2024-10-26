@@ -1,4 +1,13 @@
+#lets run a static page
 FROM ubuntu:latest
+
+#describe label
+
 LABEL author=diya
-RUN apt-get install apache2 -y \
-    && apt-get update -y
+LABEL app= "web application"
+
+#download all dependencies to run app (ngnix,jboxx,apache, windowsiis)
+RUN  apt-get update -y && \
+     apt-get install ngnix -y
+    
+COPY index.html .
