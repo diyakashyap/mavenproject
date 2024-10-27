@@ -11,3 +11,5 @@ RUN  apt-get update -y && \
      apt-get install ngnix -y
     
 COPY index.html .
+EXPOSE 80
+CMD ["ngnix","-d"]
