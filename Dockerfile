@@ -3,7 +3,7 @@ FROM ubuntu:latest
 
 #describe label
 
-LABEL author=diya
+LABEL author= diya
 LABEL app= "web application"
 
 #download all dependencies to run app (ngnix,jboxx,apache, windowsiis)
