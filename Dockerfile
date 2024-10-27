@@ -12,4 +12,4 @@ RUN  apt-get update -y && \
     
 #COPY index.html .
 EXPOSE 80
-CMD ["ngnix","-d"]
+CMD ["usr/sbin/nginx"]
