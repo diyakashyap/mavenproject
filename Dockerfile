@@ -7,8 +7,8 @@ LABEL author=diya
 LABEL app="web_application"
 
 #download all dependencies to run app (ngnix,jboxx,apache, windowsiis)
-RUN  sudo apt-get update -y && \
-     sudo apt-get install ngnix -y
+RUN  apt-get update -y && \   
+     apt-get install nginx -y
     
 COPY index.html .
 EXPOSE 80
