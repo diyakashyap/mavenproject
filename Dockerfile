@@ -10,6 +10,6 @@ LABEL app="web application"
 RUN  apt-get update -y && \   
      apt-get install nginx -y
     
-#COPY index.html .
+COPY index.html .
 EXPOSE 80
-CMD ["usr/sbin/nginx"]
+CMD ["nginx", "-g", "daemon off;"]
