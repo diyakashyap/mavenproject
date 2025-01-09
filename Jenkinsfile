@@ -1,26 +1,29 @@
 pipeline
 {
-    //agent{label 'Java'} // working
-    agent none
-    stages
-    {  
-        stage('build the code')
-        { agent{label 'Java'}
-            steps {withMaven(globalMavenSettingsConfig: '', jdk: 'JDK_home', maven: 'Maven_home', mavenSettingsConfig: '', traceability: true)
-            {
-                sh 'mvn package'
-            }
-        }}
-        // stage('Deploy the code')
-        // {// agent{label 'Java'}
-        //     steps{shagent(['DEVCICD'])
-        //      {
-        //             sh 'scp -o StrictHostKeyChecking=no webapp/target/webapp.war ec2-user@3.68.73.85:/usr/share/tomcat/webapps'
-        //     }
-        //     }
-                
-        // }
+agent any
+stages
+{
 
-        
-    } 
+stage ('scm checkout')
+{
+
+steps {  git branch: 'master', url: 'https://github.com/diyakashyap/mavenproject.git'   }}
+
+
+stage('code compile')
+{
+    steps {withMaven(globalMavenSettingsConfig: '', jdk: 'JDK_Home', maven: 'MAVEN_HOME', mavenSettingsConfig: '', traceability: true) {
+    sh 'mvn compile'
+}}}
+
+
+stage('code build')
+{ steps {withMaven(globalMavenSettingsConfig: '', jdk: 'JDK_Home', maven: 'MAVEN_HOME', mavenSettingsConfig: '', traceability: true) {
+    sh 'mvn clean -B DskipTests package'
+}}}
+
+stage('build docker image')
+{steps{ sh 'docker build . -t diya0311/devops:tomcat'}}
+}
+
 }
