@@ -1,5 +1,5 @@
 FROM tomcat:jdk21
-LABEL author:diya
+LABEL author=diya
 
 ENV APPPORT 8080
 ENV DESTPATH /usr/local/tomcat/webapps/
