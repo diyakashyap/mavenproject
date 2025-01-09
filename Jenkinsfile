@@ -19,7 +19,7 @@ stage('code compile')
 
 stage('code build')
 { steps {withMaven(globalMavenSettingsConfig: '', jdk: 'JDK_Home', maven: 'MAVEN_HOME', mavenSettingsConfig: '', traceability: true) {
-    sh 'mvn clean -B DskipTests package'
+    sh 'mvn clean package -DskipTestse'
 }}}
 
 stage('build docker image')
