@@ -24,6 +24,10 @@ stage('code build')
 
 stage('build docker image')
 {steps{ sh 'docker build . -t diya0311/devops:tomcat'}}
+
+
+stage{'push docker image to dockerhub'}
+{ step{}}
 }
 
 }
