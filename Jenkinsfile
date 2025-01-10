@@ -26,7 +26,7 @@ stage('build docker image')
 {steps{ sh 'docker build . -t diya0311/devops:tomcat'}}
 
 
-stage{'push docker image to dockerhub'}
+stage('push docker image to dockerhub')
 { steps {
     withDockerRegistry(credentialsId: 'DockerhubCred', url: 'https://index.docker.io/v1/') {
         sh 'docker push diya0311/devops:tomcat'
