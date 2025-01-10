@@ -27,9 +27,9 @@ stage('build docker image')
 
 
 stage{'push docker image to dockerhub'}
-{ steps {// This step should not normally be used in your script. Consult the inline help for details.
-withDockerRegistry(credentialsId: 'DockerhubCred', url: 'https://index.docker.io/v1/') {
-    sh 'docker push diya0311/devops:tomcat'
+{ steps {
+    withDockerRegistry(credentialsId: 'DockerhubCred', url: 'https://index.docker.io/v1/') {
+        sh 'docker push diya0311/devops:tomcat'
 }}}
 }
 
