@@ -40,7 +40,7 @@ stage('push docker image to ECR') { // Corrected syntax
             steps {
                withDockerRegistry(credentialsId: 'ecr:eu-central-1:654654407511', toolName: 'Dcker_Home', url: '654654407511.dkr.ecr.eu-central-1.amazonaws.com/devops-ecr') 
                {
-                    sh 'docker push diya0311/devops:tomcat'
+                    sh 'docker push 654654407511.dkr.ecr.eu-central-1.amazonaws.com/devops-ecr:tomcat'
                }
             }
         }
