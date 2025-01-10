@@ -27,23 +27,34 @@ stage('build docker image')
 
 
 
-stage('push docker image to dockerhub') { // Corrected syntax
+/*stage('push docker image to dockerhub') { // Corrected syntax
             steps {
                 withDockerRegistry(credentialsId: 'DockerhubCred', url: 'https://index.docker.io/v1/') {
                     sh 'docker push diya0311/devops:tomcat'
                 }
             }
         }
+*/
 
-
-/*stage('push docker image to ECR') { // Corrected syntax
+stage('push docker image to ECR') { // Corrected syntax
             steps {
                withDockerRegistry(credentialsId: 'ecr:eu-central-1:654654407511', url: '654654407511.dkr.ecr.eu-central-1.amazonaws.com/devops-ecr') 
                {
                     sh 'docker push 654654407511.dkr.ecr.eu-central-1.amazonaws.com/devops-ecr:tomcat'
                }
             }
-        }*/
+        }
+
+/*stage('Login to AWS ECR') {
+    steps {
+        withAWS(credentials: 'ecr:eu-central-1:654654407511', region: 'eu-central-1') {
+            sh '''
+            aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 654654407511.dkr.ecr.eu-central-1.amazonaws.com
+            '''
+        }
+    }
+}*/
+
 
 
 }
