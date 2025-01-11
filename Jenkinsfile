@@ -37,7 +37,7 @@ stage('build docker image')
 */
 
 
-stage('Login to AWS ECR') {
+/*stage('Login to AWS ECR') {
     steps {
         withAWS(credentials: 'ecr:eu-central-1:654654407511', region: 'eu-central-1') {
             sh '''
@@ -45,7 +45,7 @@ stage('Login to AWS ECR') {
             '''
         }
     }
-}
+}*/
 
 
 stage('push docker image to ECR') { // Corrected syntax
