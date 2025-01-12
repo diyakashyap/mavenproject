@@ -53,7 +53,7 @@ stages
                 withDockerRegistry(credentialsId: 'ecr:eu-central-1:aws', url:'https://654654407511.dkr.ecr.eu-central-1.amazonaws.com/myecr')
                 { 
                     sh 'aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 654654407511.dkr.ecr.eu-central-1.amazonaws.com'
-                    sh 'docker push 6654654407511.dkr.ecr.eu-central-1.amazonaws.com/myecr:latest'
+                    sh 'docker push 654654407511.dkr.ecr.eu-central-1.amazonaws.com/myecr:latest'
                 }
             }
         }
