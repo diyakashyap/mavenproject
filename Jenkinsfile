@@ -47,12 +47,13 @@ stages
 
         // Image push to ECR
          stage('Push Docker Image to ECR')
-        { steps 
+        { 
+            steps 
             { 
-                withDockerRegistry(credentialsId: 'ecr:eu-central-1:aws', url:'https://652912600783.dkr.ecr.eu-central-1.amazonaws.com/myecr')
+                withDockerRegistry(credentialsId: 'ecr:eu-central-1:aws', url:'https://654654407511.dkr.ecr.eu-central-1.amazonaws.com/myecr')
                 { 
-                    sh 'aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 652912600783.dkr.ecr.eu-central-1.amazonaws.com'
-                    sh 'docker push 652912600783.dkr.ecr.eu-central-1.amazonaws.com/myecr:latest'
+                    sh 'aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 654654407511.dkr.ecr.eu-central-1.amazonaws.com'
+                    sh 'docker push 6654654407511.dkr.ecr.eu-central-1.amazonaws.com/myecr:latest'
                 }
             }
         }
