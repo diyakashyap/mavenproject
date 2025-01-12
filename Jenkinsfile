@@ -3,29 +3,62 @@ pipeline
 agent any
 stages
 {
+        // SCM Checkout -> github/Code repo link
+        stage ('scm checkout')
+        {
+            steps 
+            {  
+                git branch: 'master', url: 'https://github.com/diyakashyap/mavenproject.git'   
+            }
+        }
 
-stage ('scm checkout')
-{
+        //Code Compile
+        stage('code compile')
+        {
+            steps 
+            {
+                withMaven(globalMavenSettingsConfig: '', jdk: 'JDK_Home', maven: 'MAVEN_HOME', mavenSettingsConfig: '', traceability: true) 
+                {
+                    sh 'mvn compile'
+                }
+            }
+        }
 
-steps {  git branch: 'master', url: 'https://github.com/diyakashyap/mavenproject.git'   }}
+        //Code Build
+        stage('code build')
+        { 
+            steps 
+            {
+                withMaven(globalMavenSettingsConfig: '', jdk: 'JDK_Home', maven: 'MAVEN_HOME', mavenSettingsConfig: '', traceability: true)
+                {
+                     sh 'mvn clean package -DskipTestse'
+                }
+            }
+        }
 
+        //Image build
+        stage('build docker image')
+        {
+            steps 
+            {
+                sh 'docker build . -t diya0311/devops:tomcat'
+            }
+        }
 
-stage('code compile')
-{
-    steps {withMaven(globalMavenSettingsConfig: '', jdk: 'JDK_Home', maven: 'MAVEN_HOME', mavenSettingsConfig: '', traceability: true) {
-    sh 'mvn compile'
-}}}
-
-
-stage('code build')
-{ steps {withMaven(globalMavenSettingsConfig: '', jdk: 'JDK_Home', maven: 'MAVEN_HOME', mavenSettingsConfig: '', traceability: true) {
-    sh 'mvn clean package -DskipTestse'
-}}}
-
-stage('build docker image')
-{steps{ sh 'docker build . -t diya0311/devops:tomcat'}}
-
-
+        // Image push to ECR
+         stage('Push Docker Image to ECR')
+        { steps 
+            { 
+                withDockerRegistry(credentialsId: 'ecr:eu-central-1:aws', url:'https://652912600783.dkr.ecr.eu-central-1.amazonaws.com/myecr')
+                { 
+                    sh 'aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 652912600783.dkr.ecr.eu-central-1.amazonaws.com'
+                    sh 'docker push 652912600783.dkr.ecr.eu-central-1.amazonaws.com/myecr:latest'
+                }
+            }
+        }
+        
+  }
+}
 
 /*stage('push docker image to dockerhub') { // Corrected syntax
             steps {
@@ -36,8 +69,11 @@ stage('build docker image')
         }
 */
 
+       
 
-stage('Login to AWS ECR') {
+  
+
+/*stage('Login to AWS ECR') {
     steps {
         withAWS(credentials: 'ecr:eu-central-1:654654407511', region: 'eu-central-1') {
             sh '''
@@ -56,7 +92,7 @@ stage('push docker image to ECR') { // Corrected syntax
                }
             }
         }
-
+*/
 
 
 
@@ -70,6 +106,6 @@ stage('push docker image to ECR') { // Corrected syntax
         }
 */
 
-}
+/*}
  
-}
+}*/
