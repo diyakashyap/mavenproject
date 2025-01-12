@@ -41,7 +41,7 @@ stages
         {
             steps 
             {
-                sh 'docker build . -t diya0311/devops:tomcat'
+                sh 'docker build -t 654654407511.dkr.ecr.eu-central-1.amazonaws.com/myecr:latest .'
             }
         }
 
